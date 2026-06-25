@@ -29,8 +29,10 @@
             background-color: var(--bg-light);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        /* Navigation */
         nav {
             background-color: var(--primary);
             color: var(--white);
@@ -75,10 +77,15 @@
             padding: 0.4rem 1rem;
             border-radius: 4px;
             font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
         }
 
-        nav ul a.resume-link:hover { background-color: var(--accent-hover); }
+        nav ul a.resume-link:hover { 
+            background-color: var(--accent-hover);
+            transform: scale(1.05);
+        }
 
+        /* Animated Hero Section */
         .hero {
             margin-top: 60px;
             min-height: 85vh;
@@ -94,6 +101,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            animation: slideInLeft 0.8s ease-out forwards;
         }
 
         .hero-text h1 {
@@ -116,24 +124,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
             padding: 2rem;
+            animation: fadeInRight 1s ease-out forwards;
         }
 
-        .image-placeholder {
-            width: 85%;
-            height: 75%;
-            border: 2px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 1.5rem;
+        .hero-profile-img {
+            width: 80%;
+            max-width: 360px;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
-        section { padding: 4rem 10%; }
+        .hero-profile-img:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Section Settings */
+        section { padding: 5rem 10%; }
 
         section h2 {
             font-size: 2rem;
@@ -152,6 +163,7 @@
             border-radius: 2px;
         }
 
+        /* Interactive Statistics Grid */
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -160,14 +172,20 @@
 
         .metric-card {
             background: var(--white);
-            padding: 1.5rem;
+            padding: 2rem 1.5rem;
             border-radius: 8px;
             text-align: center;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
             border-top: 4px solid var(--accent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .metric-card h3 { font-size: 2.2rem; color: var(--primary); margin-bottom: 0.2rem; }
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        .metric-card h3 { font-size: 2.4rem; color: var(--primary); margin-bottom: 0.2rem; }
 
         .track-section { background-color: #f1f5f9; }
 
@@ -191,9 +209,16 @@
             transition: all 0.3s ease;
         }
 
+        .toggle-btn:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
         .toggle-btn.active {
             background-color: var(--primary);
             color: var(--white);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
 
         .track-display-grid {
@@ -204,13 +229,8 @@
             margin: 0 auto;
         }
 
-        .track-content { display: none; animation: fadeIn 0.4s ease; }
-        .track-content.active-track { display: grid; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .track-content { display: none; }
+        .track-content.active-track { display: grid; animation: fadeInUp 0.5s ease-out forwards; }
 
         .card {
             background-color: var(--white);
@@ -218,6 +238,12 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
             border-top: 4px solid var(--accent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px -3px rgba(0,0,0,0.08);
         }
 
         .card h3 { color: var(--primary); margin-bottom: 0.2rem; font-size: 1.25rem; }
@@ -246,7 +272,10 @@
             padding: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+            transition: transform 0.3s ease;
         }
+
+        .skills-group:hover { transform: translateY(-3px); }
 
         .skills-group h3 {
             color: var(--primary);
@@ -266,20 +295,59 @@
         }
 
         footer { background-color: var(--primary); color: var(--white); text-align: center; padding: 3rem 10%; }
-        .footer-socials { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; font-size: 1.5rem; }
-        .footer-socials a { color: #cbd5e1; text-decoration: none; }
-        .footer-socials a:hover { color: var(--white); }
+        .footer-socials { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; font-size: 1.1rem; }
+        .footer-socials a { color: #cbd5e1; text-decoration: none; padding: 0.5rem 1rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; transition: all 0.3s; }
+        .footer-socials a:hover { color: var(--white); background: rgba(255,255,255,0.05); border-color: var(--white); }
 
+        /* Keyframe Animations */
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Optimization */
         @media screen and (max-width: 768px) {
-            section { padding: 3rem 5%; }
-            .hero-text { padding: 3rem 5%; }
             nav ul { display: none; }
+            section { padding: 3.5rem 6%; }
+            
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            
+            .hero-image {
+                min-height: 280px;
+                padding: 2.5rem 1rem;
+            }
+            
+            .hero-profile-img {
+                width: 180px;
+                height: 180px;
+                border-radius: 50%;
+                border: 4px solid var(--white);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            }
+            
+            .hero-text {
+                padding: 3rem 6%;
+            }
+            
+            .hero-text h1 { font-size: 2.1rem; }
+            .hero-text p { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-<!-- Navigation -->
+    <!-- Navigation -->
     <nav>
         <div class="logo">Shreya<span>Eby.</span></div>
         <ul>
@@ -287,11 +355,11 @@
             <li><a href="#tracks">Experience Tracks</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#credentials">Credentials</a></li>
-            <!-- Updated Resume Link -->
             <li><a href="resume.pdf" class="resume-link" target="_blank"><i class="fa-solid fa-file-pdf"></i> Resume</a></li>
         </ul>
     </nav>
-<!-- Hero Section -->
+
+    <!-- Hero Section -->
     <div class="hero" id="about">
         <div class="hero-text">
             <h1>Bridging AI Architecture, Analytical Reporting, and Human Impact.</h1>
@@ -299,12 +367,11 @@
             <p style="font-size: 0.95rem; color: var(--text-light);"><strong>Looking for:</strong> Strategic Internships, Research Collaborations, Data Analyst, and AI Transformation Specialist opportunities.</p>
         </div>
         <div class="hero-image">
-            <!-- Your image replaces the microphone placeholder here -->
-            <img src="profile.jpg" alt="Shreya Eby Portrait" style="width: 85%; height: 75%; object-fit: cover; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);">
+            <img src="profile.jpg" alt="Shreya Eby Portrait" class="hero-profile-img">
         </div>
     </div>
 
-    <!-- Quick Statistics Matrix -->
+    <!-- Statistics Grid -->
     <section>
         <div class="metrics-grid">
             <div class="metric-card"><h3>9.05</h3><p>B.Tech CGPA (Sem 4)</p></div>
@@ -314,7 +381,7 @@
         </div>
     </section>
 
-    <!-- Interactive Toggle Workspace -->
+    <!-- Interactive Track Selector System -->
     <section class="track-section" id="tracks">
         <div class="track-toggle-container">
             <button class="toggle-btn active" onclick="switchTrack('professional')"><i class="fa-solid fa-briefcase"></i> Professional Track & Internships</button>
@@ -372,7 +439,7 @@
             <div class="card">
                 <span class="tag">Behavioral Analytics</span>
                 <h3>AI & EQ Sentiment Capture</h3>
-                <h4>Global Financial Firm || 2026 </h4>
+                <h4>JP Morgan Chase || 2026</h4>
                 <p><strong>Problem Statement:</strong> Overcoming user gaps to transition engagement loops from passive consumption to active contribution.</p>
                 <p><strong>Strategic Skills:</strong> Google AI Studio, Human-Centered Design processes, and detailed Research Analysis implementation matrices.</p>
             </div>
@@ -393,7 +460,7 @@
             <div class="card">
                 <span class="tag">Mobile Product Strategy</span>
                 <h3>Smart Care Social Enterprise App</h3>
-                <h4>Technovation Girls || 2021[</h4>
+                <h4>Technovation Girls || 2021</h4>
                 <p><strong>Problem Statement:</strong> Addressing the non-intuitive user interfaces that lock elderly groups out of assistive smart platforms.</p>
                 <p><strong>Strategic Skills:</strong> Built a comprehensive long-term business plan, modeled sustainable revenue generation methods, and engineered low-code app layouts.</p>
             </div>
@@ -407,7 +474,7 @@
         </div>
     </section>
 
-    <!-- Unified Master Skills Matrix -->
+    <!-- Skills Section -->
     <section id="skills">
         <h2>Executive Competencies & Toolkit</h2>
         <div class="skills-container">
@@ -440,7 +507,7 @@
         </div>
     </section>
 
-    <!-- Master Certifications, Credentials & Honors -->
+    <!-- Credentials Section -->
     <section id="credentials" style="background-color: #f1f5f9;">
         <h2>Verified Credentials & Global Accolades</h2>
         <div class="skills-container">
@@ -448,69 +515,48 @@
                 <h3><i class="fa-solid fa-certificate"></i> Certifications</h3>
                 <p style="margin-bottom: 0.5rem;">• <strong>Gemini Certification for University Students</strong> (Google)</p>
                 <p style="margin-bottom: 0.5rem;">• <strong>Tata GenAI Powered Data Analytics</strong> (Job Simulation)</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>Machine Learning using Python</strong> (Amal Jyothi / LinkedIn Verified)</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>ChatGPT Prompt Engineering for Developers</strong> (DeepLearning.AI / OpenAI)</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>Collaborative Writing and Coding via OpenAI Canvas</strong> (DeepLearning.AI)</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>AI to Vision: ML/DL to Solve Real-World Problems</strong></p>
-                <p style="margin-bottom: 0.5rem;">• <strong>Atal Tinkering Lab Certified Expert</strong></p>
-                <p>• <strong>Child Care - Health and Safety Verified</strong></p>
+                <p style="margin-bottom: 0.5rem;">• <strong>Machine Learning using Python</strong> (Amal Jyothi)</p>
+                <p style="margin-bottom: 0.5rem;">• <strong>ChatGPT Prompt Engineering for Developers</strong> (DeepLearning.AI)</p>
+                <p style="margin-bottom: 0.5rem;">• <strong>Collaborative Writing and Coding via OpenAI Canvas</strong></p>
+                <p style="margin-bottom: 0.5rem;">• <strong>AI to Vision: ML/DL Framework Solutions</strong></p>
+                <p>• <strong>Atal Tinkering Lab Certified Expert</strong></p>
             </div>
             <div class="skills-group">
                 <h3><i class="fa-solid fa-award"></i> Major Honors & Awards</h3>
                 <p style="margin-bottom: 0.5rem;">• <strong>Special Jury Award</strong> | Global Healthcare Ideathon 2024</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>ATL Student Innovator Award 2019</strong> | NITI Aayog & AIM</p>
+                <p style="margin-bottom: 0.5rem;">• <strong>ATL Student Innovator Award 2019</strong> | NITI Aayog</p>
                 <p style="margin-bottom: 0.5rem;">• <strong>YIP Strategic Grant Winner 2019-2022</strong> | K-DISC & KSUM</p>
                 <p style="margin-bottom: 0.5rem;">• <strong>International Level Qualifier</strong> | Technovation Girls 2021</p>
                 <p style="margin-bottom: 0.5rem;">• <strong>3rd Place</strong> | National Robotics Championship (IIT Bombay Innovation Cell)</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>2nd Place</strong> | Amrita National Science Olympiad 2019</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>2nd Place</strong> | Ideathon Techfoss 2022 (Toc H Institute)</p>
-                <p>• <strong>Best ATL Girl Award 2019-20</strong></p>
+                <p>• <strong>2nd Place</strong> | Amrita National Science Olympiad 2019</p>
             </div>
         </div>
-    </section>
-
-    <!-- Additional Community Engagement Profile Footer -->
-    <section style="text-align: center; background-color: var(--white);">
-        <h2 style="margin-bottom: 1.5rem;">Affiliated Leadership Communities</h2>
-        <p style="max-width: 700px; margin: 0 auto 2rem; color: var(--text-light);">
-            I am a regular active member and advocate within global networks focused on diversity in tech and societal service, including 
-            <strong>Rewriting the Code</strong>, <strong>Aspire For Her</strong>, <strong>National Service Scheme (NSS Student Volunteer)</strong>, 
-            and <strong>Campus Crusade India (KSLC Student District Secretary)</strong>.
-        </p>
     </section>
 
     <!-- Footer -->
     <footer id="contact">
         <h2>Let's Drive AI Transformation Together</h2>
-        <p>Connect with me for technical analysis, strategy mapping, or speaking engagements.</p>
+        <p style="margin-bottom: 1.5rem; color: #cbd5e1;">Connect with me for technical analysis, strategy mapping, or speaking engagements.</p>
         <div class="footer-socials">
             <a href="https://www.linkedin.com/in/shreya-eby-161454327/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
             <a href="mailto:shreyaeby@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
         </div>
-        <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 1.5rem;">&copy; 2026 Shreya Eby. Built for Strategic Value.</p>
+        <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 2rem;">&copy; 2026 Shreya Eby. Built for Strategic Value.</p>
     </footer>
 
-    <!-- Bulletproof JavaScript Tab Toggle System -->
+    <!-- Tab Toggle Script -->
     <script>
         window.switchTrack = function(trackName) {
-            // 1. Clear styling active indicators on buttons
             const buttons = document.querySelectorAll('.toggle-btn');
-            buttons.forEach(function(btn) {
-                btn.classList.remove('active');
-            });
+            buttons.forEach(btn => btn.classList.remove('active'));
 
-            // 2. Hide all cards panels entirely 
             const panels = document.querySelectorAll('.track-content');
-            panels.forEach(function(panel) {
-                panel.classList.remove('active-track');
-            });
+            panels.forEach(panel => panel.classList.remove('active-track'));
 
-            // 3. Highlight the correct user targeted button using modern context mapping
             if (event && event.currentTarget) {
                 event.currentTarget.classList.add('active');
             }
 
-            // 4. Reveal the selected target section 
             const targetDiv = document.getElementById(trackName + '-track');
             if (targetDiv) {
                 targetDiv.classList.add('active-track');
