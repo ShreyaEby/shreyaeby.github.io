@@ -1,567 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shreya Eby | AI Strategy, Analytics & Management Portfolio</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <style>
-        :root {
-            --primary: #0f172a;
-            --secondary: #1e293b;
-            --accent: #b45309;
-            --accent-hover: #92400e;
-            --text-main: #334155;
-            --text-light: #64748b;
-            --bg-light: #f8fafc;
-            --white: #ffffff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        nav {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 1.2rem 10%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        }
-
-        nav .logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        nav .logo span { color: #fbbf24; }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        nav ul a {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav ul a:hover { color: var(--white); }
-
-        nav ul a.resume-link {
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.4rem 1rem;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: background 0.3s, transform 0.2s;
-        }
-
-        nav ul a.resume-link:hover { 
-            background-color: var(--accent-hover);
-            transform: scale(1.05);
-        }
-
-        /* Animated Hero Section */
-        .hero {
-            margin-top: 60px;
-            min-height: 85vh;
-            display: flex;
-            flex-wrap: wrap;
-            background-color: var(--white);
-        }
-
-        .hero-text {
-            flex: 1.2;
-            min-width: 300px;
-            padding: 4rem 10%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            animation: slideInLeft 0.8s ease-out forwards;
-        }
-
-        .hero-text h1 {
-            font-size: 2.6rem;
-            color: var(--primary);
-            line-height: 1.2;
-            margin-bottom: 1.2rem;
-        }
-
-        .hero-text p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-image {
-            flex: 0.8;
-            min-width: 300px;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            animation: fadeInRight 1s ease-out forwards;
-        }
-
-        .hero-profile-img {
-            width: 80%;
-            max-width: 360px;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .hero-profile-img:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Section Settings */
-        section { padding: 5rem 10%; }
-
-        section h2 {
-            font-size: 2rem;
-            color: var(--primary);
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        section h2::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 4px;
-            background-color: var(--accent);
-            margin: 0.4rem auto 0;
-            border-radius: 2px;
-        }
-
-        /* Interactive Statistics Grid */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .metric-card {
-            background: var(--white);
-            padding: 2rem 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
-            border-top: 4px solid var(--accent);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .metric-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-        }
-
-        .metric-card h3 { font-size: 2.4rem; color: var(--primary); margin-bottom: 0.2rem; }
-
-        .track-section { background-color: #f1f5f9; }
-
-        .track-toggle-container {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-        }
-
-        .toggle-btn {
-            padding: 0.8rem 1.6rem;
-            font-size: 1rem;
-            font-weight: 600;
-            border: 2px solid var(--primary);
-            background-color: var(--white);
-            color: var(--primary);
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-btn:hover {
-            background-color: var(--primary);
-            color: var(--white);
-            transform: translateY(-2px);
-        }
-
-        .toggle-btn.active {
-            background-color: var(--primary);
-            color: var(--white);
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-        }
-
-        .track-display-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .track-content { display: none; }
-        .track-content.active-track { display: grid; animation: fadeInUp 0.5s ease-out forwards; }
-
-        .card {
-            background-color: var(--white);
-            padding: 1.8rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
-            border-top: 4px solid var(--accent);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 20px -3px rgba(0,0,0,0.08);
-        }
-
-        .card h3 { color: var(--primary); margin-bottom: 0.2rem; font-size: 1.25rem; }
-        .card h4 { color: var(--text-light); font-weight: 600; margin-bottom: 0.6rem; font-size: 0.95rem; }
-        .card p { font-size: 0.95rem; margin-bottom: 0.5rem; }
-        
-        .card .tag {
-            background-color: #fef3c7;
-            color: #92400e;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            display: inline-block;
-            margin-bottom: 0.8rem;
-        }
-
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skills-group {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .skills-group:hover { transform: translateY(-3px); }
-
-        .skills-group h3 {
-            color: var(--primary);
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .skill-tags span {
-            background: #e2e8f0;
-            color: var(--primary);
-            padding: 0.3rem 0.7rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        footer { background-color: var(--primary); color: var(--white); text-align: center; padding: 3rem 10%; }
-        .footer-socials { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; font-size: 1.1rem; }
-        .footer-socials a { color: #cbd5e1; text-decoration: none; padding: 0.5rem 1rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; transition: all 0.3s; }
-        .footer-socials a:hover { color: var(--white); background: rgba(255,255,255,0.05); border-color: var(--white); }
-
-        /* Keyframe Animations */
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Mobile Optimization */
-        @media screen and (max-width: 768px) {
-            nav ul { display: none; }
-            section { padding: 3.5rem 6%; }
-            
-            .hero {
-                flex-direction: column-reverse;
-                text-align: center;
-            }
-            
-            .hero-image {
-                min-height: 280px;
-                padding: 2.5rem 1rem;
-            }
-            
-            .hero-profile-img {
-                width: 180px;
-                height: 180px;
-                border-radius: 50%;
-                border: 4px solid var(--white);
-                box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            }
-            
-            .hero-text {
-                padding: 3rem 6%;
-            }
-            
-            .hero-text h1 { font-size: 2.1rem; }
-            .hero-text p { font-size: 1rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shreya Eby — Human-Centered AI Researcher &amp; Communicator</title>
+<meta name="description" content="Shreya Eby — B.Tech AI &amp; Data Science student building human-centered, EQ-aware AI.Completed a Project Internship at JP Morgan Chase , student leader, Radio 90FM host.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">Shreya<span>Eby.</span></div>
-        <ul>
-            <li><a href="#about">Overview</a></li>
-            <li><a href="#tracks">Experience Tracks</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#credentials">Credentials</a></li>
-            <li><a href="resume.pdf" class="resume-link" target="_blank"><i class="fa-solid fa-file-pdf"></i> Resume</a></li>
-        </ul>
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Shreya Eby</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list" id="navToggle">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list">
+        <li><a href="#focus">Focus</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#leadership">Leadership</a></li>
+        <li><a href="#on-air">On Air</a></li>
+        <li><a href="#awards">Awards</a></li>
+        <li><a href="resume.pdf" target="_blank" rel="noopener" class="nav-resume">Resume ↗</a></li>
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
+      </ul>
     </nav>
+  </div>
+</header>
 
-    <!-- Hero Section -->
-    <div class="hero" id="about">
-        <div class="hero-text">
-            <h1>Bridging AI Architecture, Analytical Reporting, and Human Impact.</h1>
-            <p>From an innovative school researcher with 4 national-level wins to an active media host and department leader. I am an AI & Data Science engineering student (Honors in AI Security) combining computational strategy with human-centered design to guide organizations through complex digital transformations.</p>
-            <p style="font-size: 0.95rem; color: var(--text-light);"><strong>Looking for:</strong> Strategic Internships, Research Collaborations, Data Analyst, and AI Transformation Specialist opportunities.</p>
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span>currently tuning — semester 5, AI &amp; Data Science</p>
+        <h1 class="hero-title">
+          I build AI that <span class="em">listens</span>,<br>
+          and lead teams that <span class="em">build well</span>.
+        </h1>
+        <p class="hero-sub">
+          B.Tech Artificial Intelligence &amp; Data Science student (Honours, AI Security) at Amal Jyothi College of Engineering.
+          Researching human-centered, emotion-aware AI — proven with a JP Morgan Chase &amp; Co. fellowship,
+          shaped by five years of assistive-tech projects, and broadcast weekly on Radio 90FM.
+        </p>
+        <div class="hero-actions">
+          <a href="#experience" class="btn btn-primary">See the fellowship</a>
+          <a href="#projects" class="btn btn-ghost">Browse projects</a>
+          <a href="resume.pdf" target="_blank" rel="noopener" class="btn btn-ghost">Resume ↗</a>
         </div>
-        <div class="hero-image">
-            <img src="profile.jpg" alt="Shreya Eby Portrait" class="hero-profile-img">
+      </div>
+      <div class="hero-photo">
+        <div class="hero-photo-frame">
+          <img src="shreya.jpg" alt="Portrait of Shreya Eby" width="756" height="992">
         </div>
+      </div>
     </div>
+    <div class="hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1200 220" preserveAspectRatio="none" id="heroWave">
+        <defs>
+          <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#E8A33D"/>
+            <stop offset="55%" stop-color="#E8A33D"/>
+            <stop offset="100%" stop-color="#4FA8A0"/>
+          </linearGradient>
+        </defs>
+        <path id="wavePath" d="" fill="none" stroke="url(#waveGrad)" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </section>
 
-    <!-- Statistics Grid -->
-    <section>
-        <div class="metrics-grid">
-            <div class="metric-card"><h3>9.05</h3><p>B.Tech CGPA (Sem 4)</p></div>
-            <div class="metric-card"><h3>20+</h3><p>High-Impact Live Events Hosted</p></div>
-            <div class="metric-card"><h3>25+</h3><p>Online & Offline Sessions Conducted</p></div>
-            <div class="metric-card"><h3>4</h3><p>National-Level Innovation Wins</p></div>
+  <!-- FOCUS -->
+  <section class="section" id="focus">
+    <div class="wrap">
+      <p class="eyebrow eyebrow-mono">signal / focus</p>
+      <h2 class="section-title">What I actually work on</h2>
+      <div class="focus-grid">
+        <article class="focus-card focus-card--lead">
+          <p class="focus-kicker">Primary specialization</p>
+          <h3>Human-centered, EQ-aware AI</h3>
+          <p>Designing and evaluating AI systems that read engagement, sentiment, and emotional signal — then turn it into
+             recommendations real teams act on. This thread runs from an assistive spoon built for Parkinson's patients in
+             school, through a mobile care app, to a fellowship at JP Morgan Chase &amp; Co.</p>
+        </article>
+        <article class="focus-card">
+          <p class="focus-kicker">Supporting credential</p>
+          <h3>AI Security (Honours)</h3>
+          <p>A deliberate depth layer, not the destination — understanding how AI systems can be attacked, misused, or need
+             safeguarding, so the human-centered systems I build hold up under real-world conditions.</p>
+        </article>
+        <article class="focus-card">
+          <p class="focus-kicker">Method</p>
+          <h3>Research-first, adoption-tested</h3>
+          <p>Before building, I ask why a problem exists, who it affects, and what's already been tried. My JPM
+             recommendations were implemented by the team I worked with — not just filed away.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section section--panel" id="experience">
+    <div class="wrap">
+      <p class="eyebrow eyebrow-mono">transmission log</p>
+      <h2 class="section-title">Experience</h2>
+
+      <div class="exp-item exp-item--flagship">
+        <div class="exp-meta">
+          <span class="exp-date">Feb – Mar 2026</span>
+          <span class="exp-tag">Remote · 1 month</span>
         </div>
-    </section>
-
-    <!-- Interactive Track Selector System -->
-    <section class="track-section" id="tracks">
-        <div class="track-toggle-container">
-            <button class="toggle-btn active" onclick="switchTrack('professional')"><i class="fa-solid fa-briefcase"></i> Professional Track & Internships</button>
-            <button class="toggle-btn" onclick="switchTrack('strategic')"><i class="fa-solid fa-diagram-project"></i> Strategic Research & Innovation Lifecycles</button>
+        <div class="exp-body">
+          <h3>Project Intern — AI &amp; EQ Sentiment Capture</h3>
+          <p class="exp-org">JP Morgan Chase &amp; Co. · reporting to VP, Talent &amp; Workforce Development
+             (Cybersecurity &amp; Technology Vertical), Hyderabad</p>
+          <p>Conducted human-centered research into a gap between resource availability and active participation,
+             applying sentiment-capture methods and Google AI Studio to understand what moves people from passive
+             consumption to active contribution. Delivered a research report and recommendations that were
+             <strong>subsequently adopted and implemented</strong> by the team.</p>
+          <ul class="tag-list">
+            <li>Google AI Studio</li>
+            <li>Human-Centered Design</li>
+            <li>Research Analysis &amp; Implementation</li>
+          </ul>
         </div>
+      </div>
 
-        <!-- TRACK 1: PROFESSIONAL ROLES -->
-        <div id="professional-track" class="track-content track-display-grid active-track">
-            <div class="card">
-                <span class="tag">Industry Track</span>
-                <h3>FlyRank AI</h3>
-                <h4>Machine Learning Engineering Intern</h4>
-                <p style="font-size: 0.85rem; color: var(--text-light);">June 2026 - Present</p>
-                <p>Acquiring industry hands-on exposure to structural model evaluation pipelines and predictive data tracks.</p>
-            </div>
-            <div class="card">
-                <span class="tag">Leadership & Ecosystem</span>
-                <h3>Google</h3>
-                <h4>Google Student Ambassador 2026</h4>
-                <p style="font-size: 0.85rem; color: var(--text-light);">May 2026 - Present</p>
-                <p>Spearheading local tech advocacy, community growth initiatives, and Google developer tool optimization workshops.</p>
-            </div>
-            <div class="card">
-                <span class="tag">Media Operations</span>
-                <h3>Radio 90 FM</h3>
-                <h4>Radio Talk Show Host & Student Intern</h4>
-                <p style="font-size: 0.85rem; color: var(--text-light);">October 2025 - Present</p>
-                <p>Synthesizing complex themes live on-air, engaging diverse audiences, and expanding narrative delivery skills.</p>
-            </div>
-            <div class="card">
-                <span class="tag">Governance</span>
-                <h3>init() Association (AI & IT Dept.)</h3>
-                <h4>Secretary / Joint Secretary</h4>
-                <p style="font-size: 0.85rem; color: var(--text-light);">February 2025 - Present</p>
-                <p>Elected departmental lead managing cross-functional technical teams, orchestrating enterprise-wide workflows, and acting as External Event Coordinator for major Tech Fests.</p>
-            </div>
-            <div class="card">
-                <span class="tag">Oratory Club Leadership</span>
-                <h3>VOICEBOX AJCE</h3>
-                <h4>Core Team Lead</h4>
-                <p style="font-size: 0.85rem; color: var(--text-light);">January 2026 - Present</p>
-                <p>Directing public speaking clubs, mentoring student presenters, and engineering communication frameworks.</p>
-            </div>
-            <div class="card">
-                <span class="tag">Strategic Tech Launch</span>
-                <h3>Makerhub IEDC AJCE</h3>
-                <h4>Core Team Lead</h4>
-                <p style="font-size: 0.85rem; color: var(--text-light);">Feb 2026 - Mar 2026</p>
-                <p>Spearheaded community tech pipelines during the high-visibility IEDC Startup Summit 2026 framework.</p>
-            </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-date">May 2026 →</span>
+          <span class="exp-tag">Ongoing</span>
         </div>
-
-        <!-- TRACK 2: STRATEGIC PROJECTS -->
-        <div id="strategic-track" class="track-content track-display-grid">
-            <div class="card">
-                <span class="tag">Behavioral Analytics</span>
-                <h3>AI & EQ Sentiment Capture</h3>
-                <h4>JP Morgan Chase || 2026</h4>
-                <p><strong>Problem Statement:</strong> Overcoming user gaps to transition engagement loops from passive consumption to active contribution.</p>
-                <p><strong>Strategic Skills:</strong> Google AI Studio, Human-Centered Design processes, and detailed Research Analysis implementation matrices.</p>
-            </div>
-            <div class="card">
-                <span class="tag">Healthcare Strategy</span>
-                <h3>PARKI CHAIR Ecosystem</h3>
-                <h4>K-DISC, KSUM || 2019 - 2022</h4>
-                <p><strong>Problem Statement:</strong> Mitigating daily lifestyle isolation hurdles faced by elderly/immobile patients due to a lack of multi-utility supports.</p>
-                <p><strong>Strategic Skills:</strong> Developed a complete Business Model Canvas, detailed customer analysis profiles, and managed end-to-end R&D presentation pitches.</p>
-            </div>
-            <div class="card">
-                <span class="tag">R&D Lifecycle</span>
-                <h3>Stabilizing Tremor Spoon</h3>
-                <h4>ATAL Innovation Mission || 2018</h4>
-                <p><strong>Problem Statement:</strong> Mitigating physical hand tremors in Parkinson's cases to restore independent lifestyle choices.</p>
-                <p><strong>Strategic Skills:</strong> Arduino implementation, complex sensor array calibration (MPU6050), and structural hardware prototyping loops.</p>
-            </div>
-            <div class="card">
-                <span class="tag">Mobile Product Strategy</span>
-                <h3>Smart Care Social Enterprise App</h3>
-                <h4>Technovation Girls || 2021</h4>
-                <p><strong>Problem Statement:</strong> Addressing the non-intuitive user interfaces that lock elderly groups out of assistive smart platforms.</p>
-                <p><strong>Strategic Skills:</strong> Built a comprehensive long-term business plan, modeled sustainable revenue generation methods, and engineered low-code app layouts.</p>
-            </div>
-            <div class="card">
-                <span class="tag">Computer Vision Prototyping</span>
-                <h3>Object Detection & Image Training</h3>
-                <h4>Academic MVP || 2024</h4>
-                <p><strong>Problem Statement:</strong> Structuring gamified, interactive computer vision interfaces to demonstrate ML model capabilities to non-technical users.</p>
-                <p><strong>Strategic Skills:</strong> Hands-on model training via Google Teachable Machine, performance evaluation tracking, and block-based AI/ML integration.</p>
-            </div>
+        <div class="exp-body">
+          <h3>Google Student Ambassador</h3>
+          <p class="exp-org">Google</p>
+          <p>Representing Google's developer programs on campus, alongside a Gemini Certification for University
+             Students.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2>Executive Competencies & Toolkit</h2>
-        <div class="skills-container">
-            <div class="skills-group">
-                <h3><i class="fa-solid fa-chart-pie"></i> Strategic Analytics & AI</h3>
-                <div class="skill-tags">
-                    <span>AI Strategy</span><span>Analytic Reporting</span><span>AI Analytics</span>
-                    <span>Machine Learning</span><span>Data Interpretation</span><span>Data Preprocessing</span>
-                    <span>Model Training</span><span>Deep Learning</span><span>NLP</span>
-                </div>
-            </div>
-            <div class="skills-group">
-                <h3><i class="fa-solid fa-laptop-code"></i> Engineering Tools</h3>
-                <div class="skill-tags">
-                    <span>Python</span><span>NumPy</span><span>Pandas</span>
-                    <span>Matplotlib</span><span>Seaborn</span><span>Scikit-learn</span>
-                    <span>Google AI Studio</span><span>Hugging Face</span><span>GitHub</span>
-                    <span>Kaggle</span><span>Arduino</span><span>Tinkercad</span>
-                </div>
-            </div>
-            <div class="skills-group">
-                <h3><i class="fa-solid fa-people-roof"></i> Operations & Management</h3>
-                <div class="skill-tags">
-                    <span>Human-Centered Design</span><span>Project Management</span>
-                    <span>Public Speaking</span><span>Event Hosting</span><span>Collaborative Leadership</span>
-                    <span>Cross-Functional Collaboration</span><span>Business Model Canvas</span>
-                    <span>Revenue Modeling</span><span>Customer Analysis</span>
-                </div>
-            </div>
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <p class="eyebrow eyebrow-mono">build log</p>
+      <h2 class="section-title">Projects</h2>
+      <p class="section-lede">Five years of one recurring question: how do you make technology understand people who
+        are usually left out of the design process?</p>
+
+      <ol class="timeline">
+        <li class="timeline-item">
+          <span class="timeline-year">2024</span>
+          <div class="timeline-content">
+            <h3>Object Detection &amp; Image Model Training</h3>
+            <p class="timeline-org">1st-Year College Project</p>
+            <p>A real-time object detection game — identify objects from clues, earn points. Built and evaluated a
+               model with Google Teachable Machine, integrated via PictoBlox.</p>
+            <ul class="tag-list tag-list--muted">
+              <li>Google Teachable Machine</li><li>Model Evaluation</li><li>PictoBlox</li>
+            </ul>
+          </div>
+        </li>
+        <li class="timeline-item">
+          <span class="timeline-year">2021</span>
+          <div class="timeline-content">
+            <h3>Smart Care Application</h3>
+            <p class="timeline-org">Technovation Girls — Social Enterprise for the Elderly</p>
+            <p>Elderly populations face barriers to independence from non-intuitive assistive technology. Designed and
+               built a mobile app addressing that gap, backed by a full business plan and revenue model — qualified for
+               the international level.</p>
+            <ul class="tag-list tag-list--muted">
+              <li>Thunkable</li><li>Business Plan</li><li>Revenue Generation</li>
+            </ul>
+          </div>
+        </li>
+        <li class="timeline-item">
+          <span class="timeline-year">2019–2022</span>
+          <div class="timeline-content">
+            <h3>PARKI CHAIR</h3>
+            <p class="timeline-org">K-DISC, Kerala Startup Mission (KSUM)</p>
+            <p>A holistic, multi-utility smart support system for elderly and immobile patients, tackling the lack of
+               accessible daily-living support. Funded and mentored under Kerala's Youth Innovation Programme.</p>
+            <ul class="tag-list tag-list--muted">
+              <li>Business Canvas</li><li>Healthcare Innovation</li><li>Tinkercad</li><li>Customer Analysis</li>
+            </ul>
+          </div>
+        </li>
+        <li class="timeline-item">
+          <span class="timeline-year">2018</span>
+          <div class="timeline-content">
+            <h3>Stabilizing Spoon for Parkinson's Patients</h3>
+            <p class="timeline-org">ATAL Innovation Mission</p>
+            <p>A hardware device counteracting hand tremors, letting Parkinson's patients eat independently — built with
+               real-time sensor feedback.</p>
+            <ul class="tag-list tag-list--muted">
+              <li>Arduino</li><li>MPU6050 Sensor Integration</li><li>Hardware Prototyping</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section class="section section--panel" id="leadership">
+    <div class="wrap">
+      <p class="eyebrow eyebrow-mono">off the page</p>
+      <h2 class="section-title">Leadership &amp; community</h2>
+      <div class="leadership-grid">
+        <article class="lead-card">
+          <h3>Vice Chairperson</h3>
+          <p class="lead-org">Students' Council, Amal Jyothi College of Engineering</p>
+        </article>
+        <article class="lead-card">
+          <h3>Secretary</h3>
+          <p class="lead-org">VoiceBox — the Speaking &amp; Oratory Club</p>
+        </article>
+        <article class="lead-card">
+          <h3>Joint Secretary → Secretary</h3>
+          <p class="lead-org">AI Department Association (init())</p>
+          <p>Planned and executed technical events, designed analytical competitions, and coordinated student teams.</p>
+        </article>
+        <article class="lead-card">
+          <h3>Member</h3>
+          <p class="lead-org">Rewriting the Code</p>
+          <p>Global peer network supporting college and early-career women in tech with mentorship and career resources.</p>
+        </article>
+        <article class="lead-card">
+          <h3>Member</h3>
+          <p class="lead-org">Aspire For Her</p>
+          <p>India's largest women's empowerment community, connecting members with mentorship and leadership opportunities.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ON AIR / MEDIA -->
+  <section class="section" id="on-air">
+    <div class="wrap">
+      <p class="eyebrow eyebrow-mono"><span class="dot dot-live" aria-hidden="true"></span>on air</p>
+      <h2 class="section-title">Media &amp; communication</h2>
+      <div class="media-grid">
+        <article class="media-card">
+          <h3>Radio 90 FM</h3>
+          <p class="lead-org">Student Intern &amp; Talk Show Host</p>
+          <p>Interviews innovators, researchers, and entrepreneurs — conversations that double as a running source of
+             research ideas and a window into how successful people actually think and build.</p>
+        </article>
+        <article class="media-card">
+          <h3>YouTube Channel</h3>
+          <p class="lead-org">Shreya Eby</p>
+          <p>Sharing knowledge and perspective to help people explore their own potential — AI, leadership, and
+             personal growth, documented alongside the projects and people along the way.</p>
+          <a href="#" class="media-link">Watch on YouTube →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section class="section section--panel" id="awards">
+    <div class="wrap">
+      <p class="eyebrow eyebrow-mono">recognition</p>
+      <h2 class="section-title">Awards</h2>
+      <ul class="award-list">
+        <li><span class="award-year">2024</span>Special Jury Award — Global Healthcare Ideathon</li>
+        <li><span class="award-year">2022</span>2nd Prize, Ideathon — TECHFOSS, Toc H Institute of Science &amp; Technology</li>
+        <li><span class="award-year">2019–22</span>Youth Innovation Programme (YIP) — Kerala Startup Mission &amp; K-DISC</li>
+        <li><span class="award-year">2021</span>Qualified, Technovation Girls — International Level</li>
+        <li><span class="award-year">2019</span>3rd Place, National Robotics Championship — NRC India, with IIT Bombay Innovation Cell</li>
+        <li><span class="award-year">2019</span>ATL Student Innovator — NITI Aayog &amp; ATAL Innovation Mission</li>
+        <li><span class="award-year">2019</span>2nd Place, Amrita National Science Olympiad</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <div class="wrap">
+      <p class="eyebrow eyebrow-mono">toolkit</p>
+      <h2 class="section-title">Skills &amp; tools</h2>
+      <div class="skills-grid">
+        <div class="skill-col">
+          <h3>Technical</h3>
+          <ul class="chip-list">
+            <li>Python</li><li>NumPy</li><li>Pandas</li><li>Matplotlib</li><li>Seaborn</li><li>Scikit-learn</li>
+            <li>Hugging Face</li><li>Google AI Studio</li><li>GitHub</li><li>Kaggle</li>
+            <li>Google Teachable Machine</li><li>PictoBlox</li><li>Arduino</li><li>Tinkercad</li>
+          </ul>
         </div>
-    </section>
-
-    <!-- Credentials Section -->
-    <section id="credentials" style="background-color: #f1f5f9;">
-        <h2>Verified Credentials & Global Accolades</h2>
-        <div class="skills-container">
-            <div class="skills-group">
-                <h3><i class="fa-solid fa-certificate"></i> Certifications</h3>
-                <p style="margin-bottom: 0.5rem;">• <strong>Gemini Certification for University Students</strong> (Google)</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>Tata GenAI Powered Data Analytics</strong> (Job Simulation)</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>Machine Learning using Python</strong> (Amal Jyothi)</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>ChatGPT Prompt Engineering for Developers</strong> (DeepLearning.AI)</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>Collaborative Writing and Coding via OpenAI Canvas</strong></p>
-                <p style="margin-bottom: 0.5rem;">• <strong>AI to Vision: ML/DL Framework Solutions</strong></p>
-                <p>• <strong>Atal Tinkering Lab Certified Expert</strong></p>
-            </div>
-            <div class="skills-group">
-                <h3><i class="fa-solid fa-award"></i> Major Honors & Awards</h3>
-                <p style="margin-bottom: 0.5rem;">• <strong>Special Jury Award</strong> | Global Healthcare Ideathon 2024</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>ATL Student Innovator Award 2019</strong> | NITI Aayog</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>YIP Strategic Grant Winner 2019-2022</strong> | K-DISC & KSUM</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>International Level Qualifier</strong> | Technovation Girls 2021</p>
-                <p style="margin-bottom: 0.5rem;">• <strong>3rd Place</strong> | National Robotics Championship (IIT Bombay Innovation Cell)</p>
-                <p>• <strong>2nd Place</strong> | Amrita National Science Olympiad 2019</p>
-            </div>
+        <div class="skill-col">
+          <h3>Core</h3>
+          <ul class="chip-list">
+            <li>Human-Centered Design</li><li>Research &amp; Analysis</li><li>Presentation &amp; Communication</li>
+            <li>Collaborative Leadership</li><li>Critical Thinking</li><li>Problem Solving</li>
+            <li>Cross-Functional Collaboration</li>
+          </ul>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <h2>Let's Drive AI Transformation Together</h2>
-        <p style="margin-bottom: 1.5rem; color: #cbd5e1;">Connect with me for technical analysis, strategy mapping, or speaking engagements.</p>
-        <div class="footer-socials">
-            <a href="https://www.linkedin.com/in/shreya-eby-161454327/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-            <a href="mailto:shreyaeby@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
-        </div>
-        <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 2rem;">&copy; 2026 Shreya Eby. Built for Strategic Value.</p>
-    </footer>
+  <!-- CONTACT -->
+  <section class="section section--contact" id="contact">
+    <div class="wrap contact-inner">
+      <p class="eyebrow eyebrow-mono">get in touch</p>
+      <h2 class="section-title">Let's talk</h2>
+      <p class="section-lede">Open to research collaborations, fellowships, and conversations about human-centered AI.</p>
+      <div class="contact-links">
+        <a href="mailto:shreyaeby@gmail.com" class="btn btn-primary">shreyaeby@gmail.com</a>
+        <a href="https://www.linkedin.com/in/shreya-eby-161454327" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Tab Toggle Script -->
-    <script>
-        window.switchTrack = function(trackName) {
-            const buttons = document.querySelectorAll('.toggle-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
+</main>
 
-            const panels = document.querySelectorAll('.track-content');
-            panels.forEach(panel => panel.classList.remove('active-track'));
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>Designed &amp; built by Shreya Eby.</p>
+    <p class="footer-freq">90.0 FM — Kadavanthra, Kerala</p>
+  </div>
+</footer>
 
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
-
-            const targetDiv = document.getElementById(trackName + '-track');
-            if (targetDiv) {
-                targetDiv.classList.add('active-track');
-            }
-        };
-    </script>
+<script src="script.js"></script>
 </body>
 </html>
