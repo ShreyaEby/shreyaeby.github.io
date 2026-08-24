@@ -555,8 +555,8 @@ a{ color: inherit; text-decoration: none; }
 
 /* CIRCULAR PROFILE PHOTO */
 .hero-photo-frame {
-    width: 300px !important;
-    height: 300px !important;
+    width: 350px !important;
+    height: 350px !important;
     max-width: 300px !important;
     aspect-ratio: 1 / 1 !important;
     border-radius: 50% !important;
