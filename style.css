@@ -552,3 +552,23 @@ a{ color: inherit; text-decoration: none; }
   .section{ padding: 60px 0; }
   .footer-inner{ flex-direction: column; gap: 8px; }
 }
+
+/* CIRCULAR PROFILE PHOTO */
+.hero-photo-frame {
+    width: 300px !important;
+    height: 300px !important;
+    max-width: 300px !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 50% !important;
+    padding: 6px;
+    background: linear-gradient(155deg, var(--amber), var(--teal));
+    overflow: hidden;
+}
+
+.hero-photo-frame img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    display: block;
+}
